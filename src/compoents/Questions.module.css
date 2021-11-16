@@ -1,0 +1,25 @@
+.correct {
+  background-color: forestgreen !important;
+  color: fuchsia;
+}
+.wrong {
+  background-color: red !important;
+}
+
+.disabledbtn:disabled {
+  background-color: white;
+  color: black;
+}
+.question {
+  display: flex;
+  flex-direction: column;
+  justify-content: "center";
+  width: "100%";
+  position: relative;
+}
+.button {
+  width: 10%;
+}
+.font {
+  font-family: Georgia, "Times New Roman", Times, serif !important;
+}
