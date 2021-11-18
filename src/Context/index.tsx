@@ -1,23 +1,42 @@
 import { Quiz } from "@mui/icons-material";
 import React, { useContext, useState } from "react";
-import { useRefactorAnswers } from "../hooks/useRefactorAnswers";
-import { NewData } from "../types";
+
 interface ContextProviderPropsType {
   children: React.ReactNode;
 }
+export interface OnchangeValue{
+level: string,
+category: string,
+name: string,
+surname: string,}
 interface QuizContext {
   answerIndex: number | undefined;
   setAnswerIndex: (data: number | undefined) => void;
   disable: boolean;
   setDisable: (data: boolean) => void;
-  questions: NewData[] | undefined;
+  selectValue:OnchangeValue;
+  setSelectValue:(data:OnchangeValue)=>void;
+  isStart:boolean;
+  setIsStart:(data:boolean)=>void
+  score:number;
+  setScore:(data:number)=>void
 }
 const AuthContext = React.createContext<QuizContext>({
   answerIndex: undefined,
   setAnswerIndex: () => {},
   disable: false,
   setDisable: () => {},
-  questions: [],
+  selectValue:{
+    level: "",
+    category: "",
+    name: "",
+    surname: "",
+  },
+  setSelectValue:(data)=>{},
+  isStart:true,
+  setIsStart:()=>{},
+  score:0,
+  setScore:()=>{},
 });
 
 export const useGlobalData = () => useContext(AuthContext);
@@ -25,7 +44,14 @@ export const useGlobalData = () => useContext(AuthContext);
 export const Provider: React.FC<ContextProviderPropsType> = ({ children }) => {
   const [answerIndex, setAnswerIndex] = useState<number>();
   const [disable, setDisable] = useState(false);
-  const questions = useRefactorAnswers();
+  const [isStart,setIsStart]=useState(true)
+  const [score, setScore] = useState(0);
+  const [selectValue, setSelectValue] = useState({
+    level: "",
+    category: "",
+    name: "",
+    surname: "",
+  });
   return (
     <AuthContext.Provider
       value={{
@@ -33,7 +59,12 @@ export const Provider: React.FC<ContextProviderPropsType> = ({ children }) => {
         setAnswerIndex,
         disable,
         setDisable,
-        questions,
+        selectValue,
+        setSelectValue,
+        isStart,
+        setIsStart,
+        score,
+        setScore
       }}
     >
       <div>{children}</div>

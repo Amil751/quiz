@@ -4,10 +4,13 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClientProvider, QueryClient} from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { Provider } from "./Context";
 const queryClient=new QueryClient();
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>
+    <Provider>
     <App />
+    </Provider>
     <ReactQueryDevtools/>
   </QueryClientProvider>,
 
