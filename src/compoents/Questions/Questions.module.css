@@ -23,3 +23,9 @@
 .font {
   font-family: Georgia, "Times New Roman", Times, serif !important;
 }
+.btn{
+  position: absolute !important ;
+  color: red;
+  right: 0px;
+  top: 1px;
+}

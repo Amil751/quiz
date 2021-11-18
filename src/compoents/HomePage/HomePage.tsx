@@ -9,6 +9,7 @@ import classes from "./HomePage.module.css";
 import { categories, levels } from "../consts";
 import { useGlobalData } from "../../Context";
 import { useState } from "react";
+import ButtonClose from "../Buttons/ButtonClose";
 
 const HomePage = () => {
   const { setSelectValue ,setIsStart} = useGlobalData();
@@ -39,6 +40,7 @@ const HomePage = () => {
           display: "flex",
           flexDirection: "column",
         }}
+        elevation={4}
       >
         <TextField
           label="Name"
@@ -79,11 +81,14 @@ const HomePage = () => {
 
         <Button
           type="submit"
-          variant="outlined"
+          variant='contained'
+          color='primary'
           className={classes.button}
+          style={{marginTop:'5px'}}
         >
           start
         </Button>
+        
       </Paper>
     </form>
   );

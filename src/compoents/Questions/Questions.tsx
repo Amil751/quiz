@@ -4,6 +4,7 @@ import { useGlobalData } from "../../Context";
 import { NewData } from "../../types";
 import classes from "./Questions.module.css";
 import Result from "../modal/Result";
+import ButtonClose from "../Buttons/ButtonClose";
 
 type Props = {
   answers: string[] | undefined;
@@ -35,7 +36,7 @@ export const Questions = ({ answers, number, question }: Props) => {
     <>
     <div className={classes.question}>
       <h3>{number + 1}/10</h3>
-      <h3 style={{ position: "absolute", right: "5px" }}>Your score {score}</h3>
+      <h3 style={{ position: "absolute", right: "60px" }}>Your score {score}</h3>
       <p>
         {number + 1}) {question?.question}
       </p>
@@ -50,6 +51,9 @@ export const Questions = ({ answers, number, question }: Props) => {
             {options[index]}) {answer}
           </Button>
         ))}
+        <div className={classes.btn}>
+          <ButtonClose />
+        </div>
         </div>
     </>
   );
