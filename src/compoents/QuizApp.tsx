@@ -11,22 +11,22 @@ interface Props {
 }
 export const QuizApp = ({ questions }: Props) => {
   const [number, setNumber] = useState(0);
-  const [isShow,setIsShow]=useState(false);
+  const [isShow, setIsShow] = useState(false);
   const { setAnswerIndex, setDisable } = useGlobalData();
   const nextHandler = () => {
-    if(number<9){
+    if (number < 9) {
       setNumber((prev) => prev + 1);
-    }else{
-      setIsShow(true)
+    } else {
+      setIsShow(true);
     }
-    
+
     setAnswerIndex(undefined);
     setDisable(false);
   };
 
   return (
     <>
-     <Paper className={classes.paper}>
+      <Paper className={classes.paper}>
         <div
           style={{
             display: "flex",
@@ -45,8 +45,8 @@ export const QuizApp = ({ questions }: Props) => {
           next
           <NavigateNext />
         </Button>
-      </Paper>:
-     { isShow && <Result/>}
+      </Paper>
+      {isShow && <Result />}
     </>
   );
 };

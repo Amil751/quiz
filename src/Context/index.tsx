@@ -21,7 +21,7 @@ interface QuizContext {
   score:number;
   setScore:(data:number)=>void
 }
-const AuthContext = React.createContext<QuizContext>({
+export const AuthContext = React.createContext<QuizContext>({
   answerIndex: undefined,
   setAnswerIndex: () => {},
   disable: false,

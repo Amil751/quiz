@@ -1,9 +1,7 @@
 import { Button } from "@mui/material";
-import { useState } from "react";
 import { useGlobalData } from "../../Context";
 import { NewData } from "../../types";
 import classes from "./Questions.module.css";
-import Result from "../modal/Result";
 import ButtonClose from "../Buttons/ButtonClose";
 
 type Props = {

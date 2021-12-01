@@ -57,6 +57,7 @@ const HomePage = () => {
           onChange={onChangeHandler}
         />
         <Select
+          required
           className={classes.select}
           name="category"
           onChange={onChangeHandler}
@@ -67,6 +68,7 @@ const HomePage = () => {
           ))}
         </Select>
         <Select
+          required
           className={classes.select}
           name="level"
           onChange={onChangeHandler}
