@@ -3,7 +3,6 @@ import React from "react";
 import { Data, useLogin } from "../../services/useLogin";
 import classes from "./Login.module.css";
 import { useNavigate } from "react-router";
-import { getUserData } from "../../services/getUserData";
 import { useGlobalData } from "../../Context";
 import { SignUp } from "./SignUp";
 import jwtDecode from "jwt-decode";
@@ -14,7 +13,14 @@ export const Login = () => {
     password: "",
   });
   const [type, setType] = useState(true);
-  const { auth, setAuth, setUserInf, setRefreshToken } = useGlobalData();
+  const {
+    auth,
+    setAuth,
+    setUserInf,
+    setRefreshToken,
+    refreshToken,
+  } = useGlobalData();
+
   const navigate = useNavigate();
   const { mutate } = useLogin();
   // const token = localStorage.getItem("token");
@@ -22,21 +28,21 @@ export const Login = () => {
   //   const decode = jwtDecode(token);
   //   console.log(decode)
   // }
-  const clickHandler = (e: any) => {
+  const submitHandler = (e: any) => {
     e.preventDefault();
     mutate(enteredData, {
       onSuccess(res) {
-        localStorage.setItem("token", res.accessToken);
-        setUserInf({ name: res.name, surname: res.surname });
+        setUserInf({ name: res.data.name, surname: res.data.surname });
         console.log("mutate", res);
-        if (res.accessToken) {
-          setAuth(true);
-          setRefreshToken(res.refreshTokens[0]);
+        if (res.data.accessToken) {
+          localStorage.setItem("token", res.data.accessToken);
+          setRefreshToken(res.data.refreshToken);
+          navigate("/", { replace: true });
+          setAuth(true)
         }
       },
     });
   };
-  console.log(auth);
   if (auth) {
     navigate("/", { replace: true });
   }
@@ -44,30 +50,45 @@ export const Login = () => {
     const { value, name } = e.target;
     setEnteredData((prev) => ({ ...prev, [name]: value }));
   };
-  getUserData();
   return (
     <>
+         <h4 className="mb-5">QuizApp</h4>
       {type ? (
-        <form className={classes.formcontrol}>
-          <h2>Login</h2>
-          <label htmlFor="email">Email</label>
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            onChange={onChangeHandler}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={onChangeHandler}
-          />
-          <button type="submit" onClick={clickHandler}>
-            Login
+        <form onSubmit={submitHandler}>
+          <div className="mb-3">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              Email address
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              onChange={onChangeHandler}
+              name="email"
+            />
+            <div id="emailHelp" className="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              onChange={onChangeHandler}
+              name="password"
+            />
+          </div>
+          <div className="mb-3 form-check"></div>
+          <button type="submit" className="btn btn-primary">
+            Submit
           </button>
           <p
+            className="mb-3 text-secondary border-bottom"
             onClick={() => setType((type) => !type)}
             style={{ margin: "5px auto", color: "white" }}
           >

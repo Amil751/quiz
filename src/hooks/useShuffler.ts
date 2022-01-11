@@ -8,6 +8,4 @@ export const useShuffler = (newData: NewData[]|undefined)=> {
             questions.answer.sort(() => Math.random() - 0.5)
         ))
     }
-   
-    return newData
 };

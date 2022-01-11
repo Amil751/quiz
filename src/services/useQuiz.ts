@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { useGlobalData } from "../Context";
+import {Http} from '../UTILS/HTTP'
 enum Difficulty {
   EASY = "easy",
   MEDIUM = "medium",

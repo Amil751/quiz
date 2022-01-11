@@ -10,3 +10,12 @@
   right: 0px;
   top: 5px;
 }
+.formcontrol{
+  width: 40%;
+}
+
+@media (max-width:768px) {
+  .formcontrol{
+    width: 80%;
+  }
+}

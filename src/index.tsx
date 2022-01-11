@@ -2,16 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { QueryClientProvider, QueryClient} from "react-query";
-import { ReactQueryDevtools } from 'react-query/devtools'
+import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider } from "./Context";
-const queryClient=new QueryClient();
+import { BrowserRouter } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+const queryClient = new QueryClient();
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>
-    <Provider>
-    <App />
-    </Provider>
-    <ReactQueryDevtools/>
+    <BrowserRouter>
+      <Provider>
+        <App />
+      </Provider>
+    </BrowserRouter>
+    <ReactQueryDevtools />
   </QueryClientProvider>,
 
   document.getElementById("root")

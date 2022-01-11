@@ -2,7 +2,7 @@ import { NavigateNext } from "@mui/icons-material";
 import { Paper, Button } from "@mui/material";
 import { Questions } from "./Questions/Questions";
 import classes from "../App.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalData } from "../Context";
 import { NewData } from "../types";
 import Result from "./modal/Result";
@@ -11,6 +11,7 @@ interface Props {
 }
 export const QuizApp = ({ questions }: Props) => {
   const [number, setNumber] = useState(0);
+  const [question,setQuestion]=useState<NewData>()
   const [isShow, setIsShow] = useState(false);
   const { setAnswerIndex, setDisable } = useGlobalData();
   const nextHandler = () => {
@@ -20,31 +21,29 @@ export const QuizApp = ({ questions }: Props) => {
       setIsShow(true);
     }
 
-    setAnswerIndex(undefined);
+    setAnswerIndex(10);
     setDisable(false);
   };
-
+  useEffect(()=>{
+    if(questions?.length!==0&&questions){
+      setQuestion(questions[number])
+    }
+  },[questions,number])
+ 
+console.log(questions)
   return (
     <>
       <Paper className={classes.paper}>
         <div
-          style={{
-            display: "flex",
-            justifyContent: "left",
-            flexDirection: "column",
-            width: "100%",
-          }}
+          
         >
-          <Questions
-            answers={questions && questions[number].answer}
+          {question&&<Questions
             number={number}
-            question={questions && questions[number]}
-          />
+            question={question}
+            answers={question.answer}
+            nextHandler={nextHandler}
+          />}
         </div>
-        <Button onClick={nextHandler}>
-          next
-          <NavigateNext />
-        </Button>
       </Paper>
       {isShow && <Result />}
     </>
