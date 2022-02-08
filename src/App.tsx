@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,Suspense} from "react";
 import classes from "./App.module.css";
 import HomePage from "./compoents/HomePage/HomePage";
 import NavBar from "./compoents/Navbar/Navbar";
@@ -42,6 +42,7 @@ function App() {
 
   return (
     <ToastProvider>
+    
       {auth && <NavBar />}
       <div className={classes.app}>
         <Routes>
@@ -57,9 +58,11 @@ function App() {
           <Route
             path="/questions"
             element={
+            
               <Protected>
                 <QuizApp questions={questions} />
               </Protected>
+              
             }
           />
           <Route
@@ -80,6 +83,7 @@ function App() {
           />
         </Routes>
       </div>
+   
     </ToastProvider>
   );
 }

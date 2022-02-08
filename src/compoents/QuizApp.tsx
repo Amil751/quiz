@@ -2,7 +2,7 @@ import { NavigateNext } from "@mui/icons-material";
 import { Paper, Button } from "@mui/material";
 import { Questions } from "./Questions/Questions";
 import classes from "../App.module.css";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useGlobalData } from "../Context";
 import { NewData } from "../types";
 import Result from "./modal/Result";
@@ -37,12 +37,14 @@ console.log(questions)
         <div
           
         >
+            <Suspense fallback={<div>loading</div>}>
           {question&&<Questions
             number={number}
             question={question}
             answers={question.answer}
             nextHandler={nextHandler}
           />}
+            </Suspense>
         </div>
       </Paper>
       {isShow && <Result />}

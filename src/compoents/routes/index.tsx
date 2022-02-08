@@ -26,10 +26,10 @@ export const Protected: React.FC = ({ children }) => {
         localStorage.clear();
         mutate(refreshToken, {
           onSuccess: (res) => {
-            console.log("protected route", res.status);
+            console.log("protected route", res.data.status);
             console.log("protected route", res);
-            localStorage.setItem("token", res.accessToken);
-            setRefreshToken(res.refreshToken);
+            localStorage.setItem("token", res.data.accessToken);
+            setRefreshToken(res.data.refreshToken);
           },
           onError: (err: any) => {
             console.log("protected Error", err);
